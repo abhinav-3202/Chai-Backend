@@ -9,7 +9,7 @@ app.use(cors({
     credentials : true,
 }))
 
-app.use(express.json({limit : "16kb "})) // from se jo data aaya 
+app.use(express.json({limit : "16kb"})) // from se jo data aaya 
 app.use(express.urlencoded({extended : true , limit : "16kb"})) // url se dta ke liye
 app.use(express.static("public")) // storing something at the server in public folder just now created 
 app.use(cookieParser())
