@@ -4,7 +4,7 @@ import { User } from '../models/user.models.js'
 import { uploadOnCloudinary } from '../utils/cloudnary.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import cookieParser from 'cookie-parser'
-
+ // error might be in line 176 because accidently pressed backspace dont know if anything happpened or not 
 const generateAccessAndRefreshTokens = async (userId) =>{
     try {
         const user = await User.findById(userId);
@@ -58,6 +58,10 @@ const registerUser = asyncHandler( async (req , res ) =>{
 
     // console.log(req.files);
     
+
+    // the below line of code for coverImageLocalPath wont work if there is no values or empty and give error becasue we are not checking whether  
+    //  the filepath is present or not , just extracting it ... so it will show error as cannot read properties from undefined
+    // better to check from another way 
 
     const avatarLocalPath = req.files?.avatar[0]?.path;   // local path becoz file on server not yet on cloudinary
     // const coverImageLocalPath = req.files?.coverImage[0]?.path; // files wala access multer middleware se aata h 

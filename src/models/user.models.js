@@ -11,7 +11,7 @@ const userSchema = new Schema(
             unique: true,
             lowercase : true,
             trim : true,
-            index: true,
+            index: true, // for searching in database , agar har jagah kar diya to performance gir jaati     
         },
         email : {
             type: String,
