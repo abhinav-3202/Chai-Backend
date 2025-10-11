@@ -2,7 +2,7 @@ import { User } from "../models/user.models";
 import { ApiError } from "../utils/Apierror";
 import { asyncHandler } from "../utils/asyncHandler";
 import jwt from "jsonwebtoken";
-// this method will check whether user is there or not 
+// this method will check whether user is there or not OR logged in at present or not 
 
 // if after verification of access and refresh token we got correct user then add a object in req.body named as req.user
 
