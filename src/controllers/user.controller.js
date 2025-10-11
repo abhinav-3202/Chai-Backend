@@ -4,6 +4,7 @@ import { User } from '../models/user.models.js'
 import { uploadOnCloudinary } from '../utils/cloudnary.js'
 import { ApiResponse } from '../utils/ApiResponse.js'
 import cookieParser from 'cookie-parser'
+import jwt from "jsonwebtoken"; 
  // error might be in line 176 because accidently pressed backspace dont know if anything happpened or not 
 const generateAccessAndRefreshTokens = async (userId) =>{
     try {
