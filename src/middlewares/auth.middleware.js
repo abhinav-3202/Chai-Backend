@@ -19,6 +19,8 @@ export const verifyJWT = asyncHandler(async(req,res,next)=>{
         // if token present then with the help of jwt we have check if token is correct & to verify what info token has 
         
         const decodedToken = jwt.verify(token , process.env.ACCESS_TOKEN_SECRET)
+        /* decodedToken me wo saare fields rhenge jab JWT token form hua tha jwt.sign() method se in 
+           generateAccessToken me then uske response me jo jo data aaya tha wo decoded token me aa jayega */ 
     
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken")
         //._id from User.models.js file  in this function userSchema.methods.generateAccessToken

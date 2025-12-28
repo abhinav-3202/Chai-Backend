@@ -213,6 +213,8 @@ const refreshAccessToken = asyncHandler(async(req,res)=>{
     try {
         const decodedToken = jwt.verify( incomingRefreshToken , process.env.REFRESH_TOKEN_SECRET )
     
+        /*jwt.verify() guarantees authenticity and validity of the token itself,
+        but not authorization or current legitimacy of the user/session.*/
         const user = await User.findById(decodedToken?._id)
     
         if (!user) {
@@ -228,18 +230,18 @@ const refreshAccessToken = asyncHandler(async(req,res)=>{
             secure : true,
         }
     
-        const {accessToken , newRefreshToken } = await generateAccessAndRefreshTokens(user._id);
+        const {accessToken , refreshToken } = await generateAccessAndRefreshTokens(user._id);
     
         return res
         .status(200)
         .cookie("accessToken",accessToken , options)
-        .cookie("refreshToken",newRefreshToken,options)
+        .cookie("refreshToken",refreshToken,options)
         .json(
             new ApiResponse(
                 200,
                 {
                     accessToken,
-                    refreshToken : newRefreshToken
+                    refreshToken : refreshToken
                 },
                 "Access Token refreshed"
             )
@@ -276,7 +278,7 @@ const getCurrentUser = asyncHandler(async(req,res)=>{
 
 const updateAccountDetails = asyncHandler(async(req,res)=>{
     const {fullName , email } = req.body
-    if(!fullName || !email){
+    if(!fullName && !email){
         throw new ApiError(400 , "All fields are required")
     }
     
